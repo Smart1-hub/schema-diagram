@@ -1,6 +1,6 @@
 ## Schema_Based_On_Diagram: Clinic DB
 
-This project is a relational database for a vet clinic. Some new tables and foreign key columns are added to the existing animals table to model one-to-many relationships. Afterward, JOIN is used to query the data.
+This project is based on creating a schema based on diagram.
 
 
 ## Getting Started
@@ -19,6 +19,10 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - GitHub: [Smart1-hub](https://github.com/Smart1-hub)
 - Twitter: [@ademola_adebayo](https://twitter.com/ademola_adebayo)
 - LinkedIn: [Ademola-Adebayo](https://www.linkedin.com/in/ademola-adebayo/)
+
+👤 **Author1**
+
+- GitHub: [iBel251](https://github.com/iBel251))
 
 ## 🤝 Contributing
 
