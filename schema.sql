@@ -1,53 +1,47 @@
 /* Database schema to keep the structure of entire database. */
 
-CREATE TABLE animals (
+CREATE TABLE patients (
     id SERIAL PRIMARY KEY,
     name varchar(100),
-    date_of_birth date,
-    escape_attempts integer,
-    neutered boolean,
-    weight_kg decimal
+    date_of_birth date
 );
 
-ALTER TABLE animals 
-ADD column species varchar(100);
+CREATE TABLE medical_histories (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    admitted_at timestamp,
+    patient_id integer,
+    status varchar(100),
+    CONSTRAINT fk_patient FOREIGN KEY (patient_id) REFERENCES patients(id)
+);
 
-CREATE TABLE owners (
+CREATE TABLE treatments (
     id SERIAL PRIMARY KEY,
-    full_name varchar(100),
-    age integer
+    type varchar(250),
+    name varchar(250)
 );
 
-CREATE TABLE species (
-    id SERIAL PRIMARY KEY,
-    name varchar(100) NOT NULL
-);
-
-ALTER TABLE animals DROP column species;
-ALTER TABLE animals ADD column species_id int REFERENCES species(id);
-ALTER TABLE animals ADD column owner_id int REFERENCES owners(id);
-
--- add join table
-CREATE TABLE vets(
+CREATE TABLE invoices(
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(250),
-  age INT,
-  date_of_graduation DATE
+  total_amount decimal,
+  generated_at timestamp,
+  payed_at timestamp,
+  medical_history_id integer,
+  CONSTRAINT fk_history FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id)
 );
 
-CREATE TABLE specializations(
+CREATE TABLE invoice_items(
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  species_id INT,
-  vets_id INT,
-  CONSTRAINT fk_species FOREIGN KEY(species_id) REFERENCES species(id),
-  CONSTRAINT fk_vets FOREIGN KEY(vets_id) REFERENCES vets(id)
+  unit_price decimal,
+  quantity integer,
+  total_price decimal,
+  invoice_id integer,
+  treatment_id integer,
+  CONSTRAINT fk_invoice FOREIGN KEY(invoice_id) REFERENCES invoices(id),
+  CONSTRAINT fk_treatment FOREIGN KEY(treatment_id) REFERENCES treatments(id)
 );
 
-CREATE TABLE visits(
-  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  animals_id INT,
-  vets_id INT,
-  date_of_visit DATE,
-  CONSTRAINT fk_visit_animals FOREIGN KEY(animals_id) REFERENCES animals(id),
-  CONSTRAINT fk_visits_vet FOREIGN KEY(vets_id) REFERENCES vets(id)
-);
+CREATE INDEX ON medical_histories (patient_id);
+CREATE INDEX ON invoices (medical_history_id);
+CREATE INDEX ON invoice_items (invoice_id);
+CREATE INDEX ON invoice_items (treatment_id);
+
