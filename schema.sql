@@ -1,4 +1,4 @@
-/* Database schema for keeping the structure of entire database. */
+/* Database schema to keep the structure of entire database. */
 
 CREATE TABLE animals (
     id SERIAL PRIMARY KEY,
@@ -27,7 +27,7 @@ ALTER TABLE animals DROP column species;
 ALTER TABLE animals ADD column species_id int REFERENCES species(id);
 ALTER TABLE animals ADD column owner_id int REFERENCES owners(id);
 
--- add join table 
+-- add join table
 CREATE TABLE vets(
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR(250),
