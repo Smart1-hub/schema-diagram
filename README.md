@@ -20,7 +20,7 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - Twitter: [@ademola_adebayo](https://twitter.com/ademola_adebayo)
 - LinkedIn: [Ademola-Adebayo](https://www.linkedin.com/in/ademola-adebayo/)
 
-👤 **Author1**
+👤 **Author2**
 
 - GitHub: [iBel251](https://github.com/iBel251))
 
